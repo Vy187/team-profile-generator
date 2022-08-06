@@ -91,4 +91,4 @@ const getIntern = () => {
     ])
 }
 
-getEngineer();
+getIntern();
