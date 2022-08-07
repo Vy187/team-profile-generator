@@ -29,12 +29,14 @@ const getManager = () => {
             name: `officeNumber`,
             message: `What is the manager's office number?`,
             validate(answer) {return ((!/^[0-9]+$/.test(answer)) ? `The office number should only contain numbers` : true)}
-        },
-    ])
+        }
+    ]).then((answers) => {
+        const manager = new Manager(answers);
+    })
 }
 
 const getEngineer = () => {
-    inquirer.prompt([
+    const answers = inquirer.prompt([
         {
             type: `input`,
             name: `name`,
@@ -58,12 +60,13 @@ const getEngineer = () => {
             name: `github`,
             message: `What is the engineer's github username?`,
             validate(answer) {return ((!/^[A-Za-z0-9\-]*$/.test(answer)) ? `The github username should only letters, numbers, or hyphens` : true)}
-        },
-    ])
+        }
+    ]);
+    return answers;
 }
 
 const getIntern = () => {
-    inquirer.prompt([
+    const answers = inquirer.prompt([
         {
             type: `input`,
             name: `name`,
@@ -87,8 +90,9 @@ const getIntern = () => {
             name: `school`,
             message: `Where did the intern graduate from?`,
             validate(answer) {return ((!/^[a-zA-Z\s]+$/.test(answer)) ? `The school's name should only contain letters` : true)}
-        },
-    ])
+        }
+    ]);
+    return answers;
 }
 
-getIntern();
+getManager();
