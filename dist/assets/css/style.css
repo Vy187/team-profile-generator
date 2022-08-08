@@ -1,0 +1,33 @@
+body {
+    height: 100%;
+}
+
+main {
+    padding: 3%;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header {
+    background-color: red;
+    height: 20%;
+    font-size: 48px;
+    text-align: center;
+    padding: 2%;
+    color: white;
+}
+
+section {
+    margin: 1%;
+    box-shadow: 2px 2px 4px 4px #888888;
+}
+
+.card-header {
+    background-color: blue;
+    color: white;
+}
+
+.card-body {
+    background-color: lightgray;
+}
