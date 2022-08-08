@@ -32,6 +32,21 @@ const getManager = () => {
         }
     ]).then((answers) => {
         const manager = new Manager(answers);
+
+        inquirer.prompt([
+            {
+                type: `list`,
+                name: `role`,
+                message: `Select the following employee to add:`,
+                choices: [`Engineer`, `Intern`, `Done with building the team`]
+            }
+        ]).then((answer) => {
+            if (answer.role == `Done with building the team`) {
+
+            } else {
+                (answer.role == `Intern`) ? getIntern() : getEngineer()
+            }
+        })
     })
 }
 
@@ -61,8 +76,24 @@ const getEngineer = () => {
             message: `What is the engineer's github username?`,
             validate(answer) {return ((!/^[A-Za-z0-9\-]*$/.test(answer)) ? `The github username should only letters, numbers, or hyphens` : true)}
         }
-    ]);
-    return answers;
+    ]).then((answers) => {
+        const engineer = new Engineer(answers);
+
+        inquirer.prompt([
+            {
+                type: `list`,
+                name: `role`,
+                message: `Select the following employee to add:`,
+                choices: [`Engineer`, `Intern`, `Done with building the team`]
+            }
+        ]).then((answer) => {
+            if (answer.role == `Done with building the team`) {
+
+            } else {
+                (answer.role == `Intern`) ? getIntern() : getEngineer()
+            }
+        })
+    })
 }
 
 const getIntern = () => {
@@ -91,8 +122,24 @@ const getIntern = () => {
             message: `Where did the intern graduate from?`,
             validate(answer) {return ((!/^[a-zA-Z\s]+$/.test(answer)) ? `The school's name should only contain letters` : true)}
         }
-    ]);
-    return answers;
+    ]).then((answers) => {
+        const intern = new Intern(answers);
+
+        inquirer.prompt([
+            {
+                type: `list`,
+                name: `role`,
+                message: `Select the following employee to add:`,
+                choices: [`Engineer`, `Intern`, `Done with building the team`]
+            }
+        ]).then((answer) => {
+            if (answer.role == `Done with building the team`) {
+
+            } else {
+                (answer.role == `Intern`) ? getIntern() : getEngineer()
+            }
+        })
+    })
 }
 
 getManager();
