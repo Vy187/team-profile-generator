@@ -3,6 +3,7 @@ const fs = require(`fs`);
 const Manager = require(`./lib/Manager`);
 const Engineer = require(`./lib/Engineer`);
 const Intern = require(`./lib/Intern`);
+let dataArray = "";
 
 const getManager = () => {
     inquirer.prompt([
@@ -32,6 +33,7 @@ const getManager = () => {
         }
     ]).then((answers) => {
         const manager = new Manager(answers);
+        dataArray = dataArray + manager.getCard();
 
         inquirer.prompt([
             {
@@ -78,6 +80,7 @@ const getEngineer = () => {
         }
     ]).then((answers) => {
         const engineer = new Engineer(answers);
+        dataArray = dataArray + engineer.getCard();
 
         inquirer.prompt([
             {
@@ -124,6 +127,7 @@ const getIntern = () => {
         }
     ]).then((answers) => {
         const intern = new Intern(answers);
+        dataArray = dataArray + intern.getCard();
 
         inquirer.prompt([
             {
