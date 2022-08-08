@@ -3,7 +3,9 @@ const fs = require(`fs`);
 const Manager = require(`./lib/Manager`);
 const Engineer = require(`./lib/Engineer`);
 const Intern = require(`./lib/Intern`);
-let dataArray = "";
+const htmlPage = require(`./src/template`);
+const getHtml = htmlPage.htmlTemplate;
+let dataArray = ``;
 
 const getManager = () => {
     inquirer.prompt([
@@ -11,7 +13,7 @@ const getManager = () => {
             type: `input`,
             name: `name`,
             message: `What is the manager's name?`,
-            validate(answer) {return ((!/^[a-zA-Z\s]+$/.test(answer)) ? `Names contain letters` : true)}
+            validate(answer) {return ((!/^[a-zA-Z\s]+$/.test(answer) || answer.trim().length < 3) ? `Names contain letters or longer than 2 letters` : true)}
         },
         {
             type: `input`,
@@ -44,7 +46,7 @@ const getManager = () => {
             }
         ]).then((answer) => {
             if (answer.role == `Done with building the team`) {
-
+                fs.writeFile(`./dist/index.html`, getHtml(dataArray), (err) =>  err ? console.log(err) : console.log('Successfully created ./dist/index.html'))
             } else {
                 (answer.role == `Intern`) ? getIntern() : getEngineer()
             }
@@ -53,12 +55,12 @@ const getManager = () => {
 }
 
 const getEngineer = () => {
-    const answers = inquirer.prompt([
+    inquirer.prompt([
         {
             type: `input`,
             name: `name`,
             message: `What is the engineer's name?`,
-            validate(answer) {return ((!/^[a-zA-Z\s]+$/.test(answer)) ? `Names contain letters` : true)}
+            validate(answer) {return ((!/^[a-zA-Z\s]+$/.test(answer) || answer.trim().length < 3) ? `Names contain letters or longer than 2 letters` : true)}
         },
         {
             type: `input`,
@@ -91,7 +93,7 @@ const getEngineer = () => {
             }
         ]).then((answer) => {
             if (answer.role == `Done with building the team`) {
-
+                fs.writeFile(`./dist/index.html`, getHtml(dataArray), (err) =>  err ? console.log(err) : console.log('Successfully created ./dist/index.html'))
             } else {
                 (answer.role == `Intern`) ? getIntern() : getEngineer()
             }
@@ -100,12 +102,12 @@ const getEngineer = () => {
 }
 
 const getIntern = () => {
-    const answers = inquirer.prompt([
+    inquirer.prompt([
         {
             type: `input`,
             name: `name`,
             message: `What is the intern's name?`,
-            validate(answer) {return ((!/^[a-zA-Z\s]+$/.test(answer)) ? `Names contain letters` : true)}
+            validate(answer) {return ((!/^[a-zA-Z\s]+$/.test(answer) || answer.trim().length < 3) ? `Names contain letters or longer than 2 letters` : true)}
         },
         {
             type: `input`,
@@ -123,7 +125,7 @@ const getIntern = () => {
             type: `input`,
             name: `school`,
             message: `Where did the intern graduate from?`,
-            validate(answer) {return ((!/^[a-zA-Z\s]+$/.test(answer)) ? `The school's name should only contain letters` : true)}
+            validate(answer) {return ((!/^[a-zA-Z\s]+$/.test(answer) || answer.trim().length < 3) ? `The school's name should only contain letters or abbreviation should be longer than 2 letters` : true)}
         }
     ]).then((answers) => {
         const intern = new Intern(answers);
@@ -138,7 +140,7 @@ const getIntern = () => {
             }
         ]).then((answer) => {
             if (answer.role == `Done with building the team`) {
-
+                fs.writeFile(`./dist/index.html`, getHtml(dataArray), (err) =>  err ? console.log(err) : console.log('Successfully created ./dist/index.html'))
             } else {
                 (answer.role == `Intern`) ? getIntern() : getEngineer()
             }
